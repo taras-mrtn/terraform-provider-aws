@@ -8,8 +8,10 @@ var (
 	ResourceConfigurationSet = newConfigurationSetResource
 	ResourceOptOutList       = newOptOutListResource
 	ResourcePhoneNumber      = newPhoneNumberResource
+	ResourceSenderId         = newSenderIdResource
 
 	FindConfigurationSetByID = findConfigurationSetByID
 	FindOptOutListByID       = findOptOutListByID
 	FindPhoneNumberByID      = findPhoneNumberByID
+	FindSenderIdByARN        = FindSenderIdByARN
 )
