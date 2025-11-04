@@ -241,16 +241,16 @@ func (r *senderIdResource) Delete(ctx context.Context, request resource.DeleteRe
 
 type senderIdResourceModel struct {
 	framework.WithRegionModel
-	ID                        types.String                                       `tfsdk:"id"`
-	SenderIdARN               types.String                                       `tfsdk:"arn"`
-	SenderID                  types.String                                       `tfsdk:"sender_id"`
-	ISOCountryCode            types.String                                       `tfsdk:"iso_country_code"`
-	MessageTypes              fwtypes.SetOfStringEnum[awstypes.MessageType]      `tfsdk:"message_types"`
-	MonthlyLeasingPrice       types.String                                       `tfsdk:"monthly_leasing_price"`
-	Registered                types.Bool                                         `tfsdk:"registered"`
-	DeletionProtectionEnabled types.Bool                                         `tfsdk:"deletion_protection_enabled"`
-	Tags                      tftags.Map                                         `tfsdk:"tags"`
-	TagsAll                   tftags.Map                                         `tfsdk:"tags_all"`
+	ID                        types.String                                  `tfsdk:"id"`
+	SenderIdARN               types.String                                  `tfsdk:"arn"`
+	SenderID                  types.String                                  `tfsdk:"sender_id"`
+	ISOCountryCode            types.String                                  `tfsdk:"iso_country_code"`
+	MessageTypes              fwtypes.SetOfStringEnum[awstypes.MessageType] `tfsdk:"message_types"`
+	MonthlyLeasingPrice       types.String                                  `tfsdk:"monthly_leasing_price"`
+	Registered                types.Bool                                    `tfsdk:"registered"`
+	DeletionProtectionEnabled types.Bool                                    `tfsdk:"deletion_protection_enabled"`
+	Tags                      tftags.Map                                    `tfsdk:"tags"`
+	TagsAll                   tftags.Map                                    `tfsdk:"tags_all"`
 }
 
 func (model *senderIdResourceModel) InitFromID() error {
