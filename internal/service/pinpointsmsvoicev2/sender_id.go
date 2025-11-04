@@ -264,15 +264,24 @@ func (model *senderIdResourceModel) setID() {
 }
 
 func FindSenderIdByARN(ctx context.Context, conn *pinpointsmsvoicev2.Client, arn string) (*awstypes.SenderIdInformation, error) {
-	input := &pinpointsmsvoicev2.DescribeSenderIdsInput{
-		SenderIds: []awstypes.SenderIdAndCountry{
-			{
-				SenderIdArn: aws.String(arn),
-			},
-		},
+	// Query all sender IDs and filter by ARN since DescribeSenderIds
+	// doesn't support filtering by ARN directly
+	input := &pinpointsmsvoicev2.DescribeSenderIdsInput{}
+
+	senderIds, err := findSenderIds(ctx, conn, input)
+	if err != nil {
+		return nil, err
 	}
 
-	return findSenderId(ctx, conn, input)
+	for _, senderId := range senderIds {
+		if senderId.SenderIdArn != nil && *senderId.SenderIdArn == arn {
+			return &senderId, nil
+		}
+	}
+
+	return nil, &retry.NotFoundError{
+		Message: "sender ID not found",
+	}
 }
 
 func findSenderId(ctx context.Context, conn *pinpointsmsvoicev2.Client, input *pinpointsmsvoicev2.DescribeSenderIdsInput) (*awstypes.SenderIdInformation, error) {
